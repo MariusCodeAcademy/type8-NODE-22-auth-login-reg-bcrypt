@@ -53,6 +53,11 @@ app.post('/register', async (req, res) => {
   const insertResult = await addUserToDb(newUser.email, newUser.password);
   console.log('insertResult ===', insertResult);
 
+  if (insertResult === false) {
+    res.status(500).json('something wrong');
+    return;
+  }
+
   res.status(201).json('user created');
 });
 
