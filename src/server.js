@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 
@@ -33,14 +34,25 @@ app.get('/', (req, res) => {
 app.post('/register', (req, res) => {
   // gauti vartotojo email ir password ir irasyti i users
   const { email, password } = req.body;
+
+  const plainTextPassword = password;
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(plainTextPassword, salt);
+  console.log('salt ===', salt);
+  console.log('hashedPassword ===', hashedPassword);
+
+  // pass = 123456
+  // salt = kjhdjs.123456
+  // hash = kasdjakhs2k3h2kjhkjasd
+
   const newUser = {
     email,
-    password,
+    password: hashedPassword,
   };
+
   users.push(newUser);
 
   res.status(201).json('user created');
-  console.log('users ===', users);
 });
 
 // POST /login - tuscias routas grazina 'bandom prisilogint'
