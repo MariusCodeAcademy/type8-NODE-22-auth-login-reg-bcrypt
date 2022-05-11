@@ -45,7 +45,21 @@ app.post('/register', (req, res) => {
 
 // POST /login - tuscias routas grazina 'bandom prisilogint'
 app.post('/login', (req, res) => {
-  res.json('bandom prisilogint');
+  const gautasEmail = req.body.email;
+  const gautasSlaptazodis = req.body.password;
+  // patikrinti ar yra toks email kaip gautas
+  const foundUser = users.find((uObj) => uObj.email === gautasEmail);
+  // jei nera 400 email or password not found
+  if (!foundUser) {
+    res.status(400).json('email or password not found (email)');
+    return;
+  }
+  // jei yra tikrinam ar sutampa slaptazodis
+  if (foundUser.password !== gautasSlaptazodis) {
+    res.status(400).json('email or password not found (pass)');
+    return;
+  }
+  res.json('login success');
 });
 
 // GET /users - grazina visus vartojus json formatu
