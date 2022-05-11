@@ -2,10 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const { PORT } = require('./config');
 
 const app = express();
-
-const PORT = 3000;
 
 // users db
 const users = [
@@ -49,7 +48,7 @@ app.post('/register', (req, res) => {
     email,
     password: hashedPassword,
   };
-
+  // kviesti modelio funkcija kuri sukuria varototoja
   users.push(newUser);
 
   res.status(201).json('user created');
