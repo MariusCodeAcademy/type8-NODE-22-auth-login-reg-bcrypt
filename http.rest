@@ -9,3 +9,7 @@ Content-Type: application/json
   "email": "Jill@Crown.lt",
   "password": "secret1234"
 }
+
+####
+
+POST http://localhost:3000/login
