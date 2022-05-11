@@ -36,9 +36,9 @@ app.post('/register', (req, res) => {
   const { email, password } = req.body;
 
   const plainTextPassword = password;
-  const salt = bcrypt.genSaltSync(10);
-  const hashedPassword = bcrypt.hashSync(plainTextPassword, salt);
-  console.log('salt ===', salt);
+  // const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(plainTextPassword, 10);
+  // console.log('salt ===', salt);
   console.log('hashedPassword ===', hashedPassword);
 
   // pass = 123456
@@ -67,7 +67,8 @@ app.post('/login', (req, res) => {
     return;
   }
   // jei yra tikrinam ar sutampa slaptazodis
-  if (foundUser.password !== gautasSlaptazodis) {
+  // bcrypt.compareSync(ivestas slaptazodis, issaugotas hashed slaptazodis)
+  if (!bcrypt.compareSync(gautasSlaptazodis, foundUser.password)) {
     res.status(400).json('email or password not found (pass)');
     return;
   }
