@@ -13,7 +13,12 @@ async function addUserToDb(email, password) {
     return result;
   } catch (error) {
     console.log('error addUserToDb');
+    return false;
   } finally {
     conn?.end();
   }
 }
+
+module.exports = {
+  addUserToDb,
+};

@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const { PORT } = require('./config');
+const { addUserToDb } = require('./model/userModel');
 
 const app = express();
 
@@ -30,7 +31,7 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
   // gauti vartotojo email ir password ir irasyti i users
   const { email, password } = req.body;
 
@@ -49,7 +50,8 @@ app.post('/register', (req, res) => {
     password: hashedPassword,
   };
   // kviesti modelio funkcija kuri sukuria varototoja
-  users.push(newUser);
+  const insertResult = await addUserToDb(newUser.email, newUser.password);
+  console.log('insertResult ===', insertResult);
 
   res.status(201).json('user created');
 });
