@@ -23,6 +23,7 @@ formEl.addEventListener('submit', async (event) => {
   console.log('dataInJs ===', dataInJs);
   if (dataInJs.success === true) {
     console.log('login success');
+    errroEl.textContent = '';
   } else {
     console.log('login fail');
     handleError(dataInJs);
