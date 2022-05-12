@@ -33,5 +33,13 @@ formEl.addEventListener('submit', async (event) => {
 });
 
 function handleError(msg) {
-  errroEl.textContent = msg;
+  errroEl.textContent = '';
+  if (typeof msg === 'string') {
+    errroEl.textContent = msg;
+  }
+  if (Array.isArray(msg)) {
+    msg.forEach((eObj) => {
+      errroEl.innerHTML += `${eObj.message}<br>`;
+    });
+  }
 }
