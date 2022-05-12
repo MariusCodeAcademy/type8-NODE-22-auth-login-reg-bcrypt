@@ -27,7 +27,15 @@ formEl.addEventListener('submit', (e) => {
 // 4. pranesti apie klaida jei tokia ivyko
 
 function handleError(msg) {
-  errroEl.textContent = msg;
+  errroEl.textContent = '';
+  if (typeof msg === 'string') {
+    errroEl.textContent = msg;
+  }
+  if (Array.isArray(msg)) {
+    msg.forEach((eObj) => {
+      errroEl.innerHTML += `${eObj.message}<br>`;
+    });
+  }
 }
 
 async function registerFetch(email, password) {
@@ -44,6 +52,6 @@ async function registerFetch(email, password) {
     handleError('register success');
   } else {
     // fail
-    handleError('something wrong');
+    handleError(await resp.json());
   }
 }
