@@ -12,6 +12,7 @@ formEl.addEventListener('submit', async (event) => {
     password: formEl.elements.password.value.trim(),
   };
   console.log('loginObj ===', loginObj);
+
   const resp = await fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: {
@@ -21,6 +22,7 @@ formEl.addEventListener('submit', async (event) => {
   });
   const dataInJs = await resp.json();
   console.log('dataInJs ===', dataInJs);
+
   if (dataInJs.success === true) {
     console.log('login success');
     errroEl.textContent = '';
