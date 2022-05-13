@@ -1,3 +1,23 @@
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "Captain Nemo",
+  "year": 1957,
+  "author_id": 2
+}
+
+####
+GET http://localhost:3000/books-count
+
+####
+####
+GET http://localhost:3000/books-authors
+
+####
+GET http://localhost:3000/books
+
+####
 GET http://localhost:3000/users
 
 ####
