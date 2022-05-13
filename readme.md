@@ -14,3 +14,12 @@
 4. /login route patikrinti ar toks vartotojas egzistuoja
    4.1 surasti vartotoja pagal email
    4.2 jei radom patikrinti ar slaptazodziai sutampa
+
+### jwt
+
+[jwt npm](https://www.npmjs.com/package/jsonwebtoken)
+
+1. npm install jsonwebtoken
+2. const jwt = require('jsonwebtoken');
+3. const token = jwt.sign({ userId: 1254 }, jwtSecret, {expiresIn: 1h})
+4. const payload = jwt.verify(token, jwtSecret)
