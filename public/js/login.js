@@ -29,7 +29,10 @@ formEl.addEventListener('submit', async (event) => {
     // issaugoti reiksme localStorage
     const token = dataInJs.token;
     localStorage.setItem('bookUserToken', token);
-    window.location.href = 'books.html';
+    // sukuria narsykles puslapiu istorijoje nauja irasa nunaviguodamas
+    // window.location.href = 'books.html';
+    // nunaviguoja, padaro kad negaletume gryzti atgal psl su back
+    window.location.replace('books.html');
   } else {
     console.log('login fail');
     handleError(dataInJs);
