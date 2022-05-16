@@ -1,6 +1,8 @@
-import { BASE_URL } from './modules/fetch.js';
+import { getFetch } from './modules/fetch.js';
 
 console.log('books');
+
+const booksListEl = document.getElementById('books');
 
 // books tik registruotiems prisijungusiems vartotojams
 const token = localStorage.getItem('bookUserToken');
@@ -11,11 +13,20 @@ if (!token) {
   window.location.replace('login.html');
 }
 
-// gauti ir iskonsolinti visas knygas
-async function getBooks() {
-  const resp = await fetch(`${BASE_URL}/books`);
-  const dataInJs = await resp.json();
-  console.log('dataInJs ===', dataInJs);
+function renderBooks(arr, dest) {
+  dest.innerHTML = '';
+  arr.forEach((bObj) => {
+    const liEl = document.createElement('li');
+    liEl.textContent = `${bObj.title} - ${bObj.year}`;
+    dest.append(liEl);
+  });
 }
-getBooks();
+
+// gauti ir iskonsolinti visas knygas
+async function getBooks(userToken) {
+  const booksArr = await getFetch('books', userToken);
+  console.log('booksArr ===', booksArr);
+  renderBooks(booksArr, booksListEl);
+}
+getBooks(token);
 // atvaizduoti knygas saraso pavidalu htmle
