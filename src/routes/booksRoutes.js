@@ -1,4 +1,5 @@
 const express = require('express');
+const { validateToken } = require('../middleware');
 const {
   getAllBooksDb,
   allBooksWithAuthors,
@@ -10,7 +11,7 @@ const booksRoutes = express.Router();
 // sukuriam booksRoutes routeri
 
 // GET /books - grazinti visas knygas
-booksRoutes.get('/books', async (req, res) => {
+booksRoutes.get('/books', validateToken, async (req, res) => {
   try {
     const allBooksArr = await getAllBooksDb();
     res.json(allBooksArr);
