@@ -4,3 +4,5 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=
 DB_DB=type8_auth
+
+JWT_SECRET=secret123

@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { validateUser } = require('../middleware');
 const { addUserToDb, findUserByEmail } = require('../model/userModel');
+const { jwtSecret } = require('../config');
 
-const jwtSecret = 'secret123';
 const userRoutes = express.Router();
 
 userRoutes.post('/register', validateUser, async (req, res) => {

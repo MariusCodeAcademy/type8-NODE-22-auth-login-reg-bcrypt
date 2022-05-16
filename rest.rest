@@ -15,8 +15,9 @@ GET http://localhost:3000/books-count
 GET http://localhost:3000/books-authors
 
 ####
+
 GET http://localhost:3000/books
-Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MjY4MzI1MywiZXhwIjoxNjUyNjg2ODUzfQ.Ybm5QpR_0-YZ9NJgA-AV8-vQJgDOqovHBZUBErT4zHU"
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MjY4ODEyOCwiZXhwIjoxNjUyNjkxNzI4fQ.IN5sfR3Nye8NVW0vumL4xQr5Rt9q4tQnmdK6EJSGiic "
 
 ####
 GET http://localhost:3000/users

@@ -1,5 +1,6 @@
 const Joi = require('joi');
-
+const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('./config');
 // first middlewere helper
 function showBody(req, res, next) {
   // console.log(req.method);
@@ -29,8 +30,34 @@ async function validateUser(req, res, next) {
 }
 
 async function validateToken(req, res, next) {
-  console.log('req.headers', req.headers);
-  next();
+  const tokenFromHeaders = req.headers.authorization?.split(' ')[1];
+  // nera token
+  if (!tokenFromHeaders) {
+    res.status(401).json({
+      success: false,
+      error: 'no token',
+    });
+    return;
+  }
+  // token yra
+  try {
+    // token patikrinimas
+    // jwt.verify(token, secret)
+    console.log('tokenFromHeaders ===', tokenFromHeaders);
+    const tokenPayload = jwt.verify(tokenFromHeaders, jwtSecret);
+    console.log('tokenPayload ===', tokenPayload);
+    next();
+  } catch (error) {
+    console.log('error verifyRezult ===', error);
+    // token not valid
+    res.status(403).json({
+      success: false,
+      error: 'invalid token',
+    });
+  }
+
+  // istraukti token reiksme is headers
+  // validuoti token
 }
 
 module.exports = {
