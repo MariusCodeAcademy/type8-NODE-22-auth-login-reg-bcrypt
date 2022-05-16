@@ -12,6 +12,10 @@ const booksRoutes = express.Router();
 
 // GET /books - grazinti visas knygas
 booksRoutes.get('/books', validateToken, async (req, res) => {
+  if (req.userId) {
+    // atsiusti tik to vartotojo knygas
+    console.log('gauti tik sio vartojo knygas', req.userId);
+  }
   try {
     const allBooksArr = await getAllBooksDb();
     res.json(allBooksArr);
